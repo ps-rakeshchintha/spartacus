@@ -8,6 +8,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { withStyles } from "@material-ui/core/styles";
 
 import Options from "./Options/Options";
+import Cropper from "./Cropper/Cropper";
+import FileUpload from "./FileUpload/FileUpload";
 
 const drawerWidth = 240;
 
@@ -40,16 +42,62 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3)
-    }
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
+    input: {
+        display: 'none',
+    },
 });
 
 class ImageCropper extends React.Component {
     state = {
-        mobileOpen: false
+        mobileOpen: false,
+        cropperOptions: {
+            aspectRatio: 16/9,
+            flipHorizontal: false,
+            flipVertical: false,
+            rotateToDegree: 0,
+        },
+        imageUrl: undefined
     }
     handleDrawerToggle = () => {
         this.setState({
             mobileOpen: !this.state.mobileOpen
+        })
+    }
+    handleFileUpload = (imageUrl) => {
+        this.setState({
+            imageUrl: imageUrl
+        })
+    }
+    handleAspectRatioChange = (aspectRatio) => {
+        let cropperOptions = this.state.cropperOptions;
+        cropperOptions.aspectRatio = aspectRatio;
+        this.setState({
+            cropperOptions: cropperOptions
+        })
+    }
+    toggleFlipHorizontal = () => {
+        let cropperOptions = this.state.cropperOptions;
+        cropperOptions.flipHorizontal = !cropperOptions.flipHorizontal;
+        this.setState({
+            cropperOptions: cropperOptions
+        })
+    }
+    toggleFlipVertical = () => {
+        let cropperOptions = this.state.cropperOptions;
+        cropperOptions.flipVertical = !cropperOptions.flipVertical;
+        this.setState({
+            cropperOptions: cropperOptions
+        })
+    }
+    setRotateToDegree = (deg) => {
+        let cropperOptions = this.state.cropperOptions;
+        cropperOptions.rotateToDegree = deg;
+        this.setState({
+            cropperOptions: cropperOptions
         })
     }
     render() {
@@ -62,7 +110,7 @@ class ImageCropper extends React.Component {
                             color="inherit"
                             aria-label="open drawer"
                             edge="start"
-                            onClick={this.handleDrawerToggle}
+                            onClick={() => this.handleDrawerToggle()}
                             className={classes.menuButton}
                         >
                             <MenuIcon />
@@ -84,7 +132,12 @@ class ImageCropper extends React.Component {
                                 keepMounted: true // Better open performance on mobile.
                             }}
                         >
-                            <Options />
+                            <Options
+                                onAspectRatioChange={this.handleAspectRatioChange}
+                                cropperOptions={this.state.cropperOptions}
+                                toggleFlipHorizontal={this.toggleFlipHorizontal}
+                                toggleFlipVertical={this.toggleFlipVertical}
+                                setRotateToDegree={this.setRotateToDegree} />
                         </Drawer>
                     </Hidden>
                     <Hidden xsDown implementation="css">
@@ -95,10 +148,30 @@ class ImageCropper extends React.Component {
                             variant="permanent"
                             open
                         >
-                            <Options />
+                            <Options
+                                onAspectRatioChange={this.handleAspectRatioChange}
+                                cropperOptions={this.state.cropperOptions}
+                                toggleFlipHorizontal={this.toggleFlipHorizontal}
+                                toggleFlipVertical={this.toggleFlipVertical}
+                                setRotateToDegree={this.setRotateToDegree} />
                         </Drawer>
                     </Hidden>
                 </nav>
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
+                    {!this.state.imageUrl && <FileUpload handleFileUpload={this.handleFileUpload} />}
+                    {
+                        this.state.imageUrl &&
+                        <Cropper
+                            imageUrl={this.state.imageUrl}
+                            rotateToDegree={this.state.cropperOptions.rotateToDegree} 
+                            aspectRatio={this.state.cropperOptions.aspectRatio} 
+                            flipHorizontal={this.state.cropperOptions.flipHorizontal} 
+                            flipVertical={this.state.cropperOptions.flipVertical} />
+                    }
+
+                </main>
+
             </div>
         )
     }

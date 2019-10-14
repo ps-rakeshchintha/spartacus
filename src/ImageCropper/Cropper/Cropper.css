@@ -1,0 +1,9 @@
+ .cropper-box {
+    width: 100%;
+    height: calc(100vh - 130px);
+    margin: auto;
+}
+#cropper-image-container {
+    max-width: 100%;
+    object-fit: contain;
+}
