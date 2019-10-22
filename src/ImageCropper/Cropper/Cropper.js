@@ -1,16 +1,14 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
 import imageCropper from 'cropperjs';
 import './Cropper.css';
 import 'cropperjs/dist/cropper.min.css';
-import Button from '@material-ui/core/Button';
 
 class Cropper extends React.Component {
     cropper = undefined;
     componentDidMount() {
-        const image = document.getElementById('cropper-image-container');
+        const image = document.getElementById('cropper-img');
         this.cropper = new imageCropper(image, {
-            aspectRatio: 16 / 9,
+            aspectRatio: this.props.aspectRatio,
             viewMode: 1,
             crop(event) {
                 //console.log("x:" + event.detail.x);
@@ -26,11 +24,7 @@ class Cropper extends React.Component {
     componentDidUpdate(prevProps, prevSate) {
         if (prevProps.rotateToDegree !== this.props.rotateToDegree) {
             this.cropper.rotateTo(this.props.rotateToDegree);
-            const containerData = this.cropper.getContainerData();
-            this.cropper.zoomTo(.5, {
-                x: containerData.width / 2,
-                y: containerData.height / 2,
-            });
+            this.cropper.moveTo(0,0)
         }
         if (prevProps.aspectRatio !== this.props.aspectRatio)
             this.cropper.setAspectRatio(this.props.aspectRatio);
@@ -39,30 +33,33 @@ class Cropper extends React.Component {
         if (prevProps.flipVertical !== this.props.flipVertical)
             this.cropper.scaleY(this.props.flipVertical ? -1 : 1);
     }
+    zoomIn = () => {
+        this.cropper.zoom(0.1);
+    }
+    zoomOut = () => {
+        this.cropper.zoom(-0.1);
+    }
     cropImage = () => {
-        const canvas = this.cropper.getCroppedCanvas();
-        const dataURL = canvas.toDataURL("image/png");
+        const canvas = this.cropper.getCroppedCanvas({
+            imageSmoothingEnabled: false,
+            imageSmoothingQuality: 'high'
+        });
+        const dataURL = canvas.toDataURL(this.props.imageType);
 
         let link = document.createElement("a");
         link.href = dataURL;
-        link.download = "image.png";
+        link.download = "modified_"+this.props.imageName;
         document.body.append(link);
         link.click();
         link.remove();
     }
     render() {
         return (
-            <div className="cropper-box">
-                <img id="cropper-image-container" src={this.props.imageUrl} alt="Cropper" />
-                <Button
-                    component="span"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.cropImage()}
-                    size="large">
-                    Crop
-                </Button>
-            </div>
+            <React.Fragment>
+                <div className="cropper-box">
+                    <img id="cropper-img" src={this.props.imageUrl} alt="Cropper" />
+                </div>
+            </React.Fragment>
         )
     }
 }

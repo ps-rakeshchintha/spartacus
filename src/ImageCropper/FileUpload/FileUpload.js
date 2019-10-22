@@ -17,7 +17,7 @@ class FileUpload extends React.Component {
     onFileUpload = (e) => {
         var files = e.target.files;
         var done = (url) => {
-            this.props.handleFileUpload(url);
+            this.props.handleFileUpload(url, file.type, file.name);
         };
         var reader;
         var file;

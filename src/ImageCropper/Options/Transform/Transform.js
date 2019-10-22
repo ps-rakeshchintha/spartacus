@@ -53,7 +53,7 @@ class Transform extends React.Component {
         return (
             <form className={classes.root} noValidate autoComplete="off" onSubmit={(e) => e.preventDefault()}>
                 <Typography variant="subtitle1" className={classes.centerAlign} gutterBottom>Transform</Typography>
-                <Typography id="input-slider">Flip:</Typography>
+                <Typography>Flip:</Typography>
                 <div className={classes.centerAlign} >
                     <Tooltip title="Flip Horizontal">
                         <IconButton onClick={() => this.flipHorizontalClick()} className={classes.iconButton}>
@@ -66,7 +66,7 @@ class Transform extends React.Component {
                         </IconButton>
                     </Tooltip>
                 </div>
-                <Typography id="input-slider">Rotate:</Typography>
+                <Typography>Rotate:</Typography>
                 <div className={classes.centerAlign} >
                     <Tooltip title="Rotate Left">
                         <IconButton onClick={() => this.rotateStep(-90)} className={classes.iconButton}>

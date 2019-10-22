@@ -3,6 +3,7 @@ import Divider from "@material-ui/core/Divider";
 
 import AspectRatio from "./AspectRatio/AspectRatio";
 import Transform from "./Transform/Transform";
+import Zoom from "./Zoom/Zoom";
 
 class Options extends React.Component {
     handleAspectRatioChange = (aspectRatio) => {
@@ -17,10 +18,15 @@ class Options extends React.Component {
     setRotateToDegree = (deg) => {
         this.props.setRotateToDegree(deg);
     }
+    zoomOut = () => {
+        this.props.zoomOut();
+    }
+    zoomIn = () => {
+        this.props.zoomIn();
+    }
     render() {
         return (
             <React.Fragment>
-                <h1>Options</h1>
                 <Divider />
                 <AspectRatio
                     aspectRatio={this.props.cropperOptions.aspectRatio}
@@ -29,13 +35,17 @@ class Options extends React.Component {
                 <Transform
                     flipHorizontal={this.props.cropperOptions.flipHorizontal}
                     flipVertical={this.props.cropperOptions.flipVertical}
-                    rotateToDegree={this.props.cropperOptions.rotateToDegree} 
+                    rotateToDegree={this.props.cropperOptions.rotateToDegree}
                     toggleFlipHorizontal={this.toggleFlipHorizontal}
                     toggleFlipVertical={this.toggleFlipVertical}
                     setRotateToDegree={this.setRotateToDegree}
-                    />
-                    
+                />
+
                 <Divider />
+                <Zoom
+                    zoomIn={this.zoomIn}
+                    zoomOut={this.zoomOut}
+                />
             </React.Fragment>
         )
     }
