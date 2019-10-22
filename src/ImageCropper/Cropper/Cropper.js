@@ -1,14 +1,22 @@
 import React from "react";
 import imageCropper from 'cropperjs';
+import OpenWithIcon from '@material-ui/icons/OpenWith';
+import CropIcon from '@material-ui/icons/Crop';
+import Typography from '@material-ui/core/Typography';
+
 import './Cropper.css';
 import 'cropperjs/dist/cropper.min.css';
 
 class Cropper extends React.Component {
+    state = {
+        cropperDetails: {}
+    }
     cropper = undefined;
     componentDidMount() {
         const image = document.getElementById('cropper-img');
+        let that = this;
         this.cropper = new imageCropper(image, {
-            aspectRatio: this.props.aspectRatio,
+            aspectRatio: that.props.aspectRatio,
             viewMode: 1,
             crop(event) {
                 //console.log("x:" + event.detail.x);
@@ -18,13 +26,17 @@ class Cropper extends React.Component {
                 //console.log("rotate:" + event.detail.rotate);
                 //console.log("scaleX" + event.detail.scaleX);
                 //console.log("scaleY" + event.detail.scaleY);
+                //that.props.updateCropperEventDetails(event.detail)
+                that.setState({
+                    cropperDetails: event.detail
+                })
             },
         });
     }
     componentDidUpdate(prevProps, prevSate) {
         if (prevProps.rotateToDegree !== this.props.rotateToDegree) {
             this.cropper.rotateTo(this.props.rotateToDegree);
-            this.cropper.moveTo(0,0)
+            this.cropper.moveTo(0, 0)
         }
         if (prevProps.aspectRatio !== this.props.aspectRatio)
             this.cropper.setAspectRatio(this.props.aspectRatio);
@@ -48,7 +60,7 @@ class Cropper extends React.Component {
 
         let link = document.createElement("a");
         link.href = dataURL;
-        link.download = "modified_"+this.props.imageName;
+        link.download = "modified_" + this.props.imageName;
         document.body.append(link);
         link.click();
         link.remove();
@@ -58,6 +70,20 @@ class Cropper extends React.Component {
             <React.Fragment>
                 <div className="cropper-box">
                     <img id="cropper-img" src={this.props.imageUrl} alt="Cropper" />
+                </div>
+                <div className="cropper-footer">
+                    <span>
+                        <OpenWithIcon fontSize="small" />
+                        <Typography variant="subtitle1" display="inline-block" className="position-details">
+                            {Math.floor(this.state.cropperDetails.x)}, {Math.floor(this.state.cropperDetails.y)}px
+                        </Typography>
+                    </span>
+                    <span>
+                        <CropIcon fontSize="small" />
+                        <Typography variant="subtitle1" display="inline-block" className="position-details">
+                            {Math.floor(this.state.cropperDetails.width)} x {Math.floor(this.state.cropperDetails.height)}px
+                        </Typography>
+                    </span>
                 </div>
             </React.Fragment>
         )
