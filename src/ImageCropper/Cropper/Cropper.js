@@ -1,16 +1,13 @@
 import React from "react";
 import imageCropper from 'cropperjs';
-import OpenWithIcon from '@material-ui/icons/OpenWith';
-import CropIcon from '@material-ui/icons/Crop';
-import Typography from '@material-ui/core/Typography';
+//import OpenWithIcon from '@material-ui/icons/OpenWith';
+//import CropIcon from '@material-ui/icons/Crop';
+//import Typography from '@material-ui/core/Typography';
 
 import './Cropper.css';
 import 'cropperjs/dist/cropper.min.css';
 
 class Cropper extends React.Component {
-    state = {
-        cropperDetails: {}
-    }
     cropper = undefined;
     componentDidMount() {
         const image = document.getElementById('cropper-img');
@@ -27,9 +24,6 @@ class Cropper extends React.Component {
                 //console.log("scaleX" + event.detail.scaleX);
                 //console.log("scaleY" + event.detail.scaleY);
                 //that.props.updateCropperEventDetails(event.detail)
-                that.setState({
-                    cropperDetails: event.detail
-                })
             },
         });
     }
@@ -71,23 +65,25 @@ class Cropper extends React.Component {
                 <div className="cropper-box">
                     <img id="cropper-img" src={this.props.imageUrl} alt="Cropper" />
                 </div>
-                <div className="cropper-footer">
-                    <span>
-                        <OpenWithIcon fontSize="small" />
-                        <Typography variant="subtitle1" display="inline-block" className="position-details">
-                            {Math.floor(this.state.cropperDetails.x)}, {Math.floor(this.state.cropperDetails.y)}px
-                        </Typography>
-                    </span>
-                    <span>
-                        <CropIcon fontSize="small" />
-                        <Typography variant="subtitle1" display="inline-block" className="position-details">
-                            {Math.floor(this.state.cropperDetails.width)} x {Math.floor(this.state.cropperDetails.height)}px
-                        </Typography>
-                    </span>
-                </div>
             </React.Fragment>
         )
     }
 }
 
 export default (Cropper);
+
+/*
+<div className="cropper-footer">
+<span>
+    <OpenWithIcon fontSize="small" />
+    <Typography variant="subtitle1" display="inline" className="position-details">
+        {Math.floor(this.state.cropperDetails.x)}, {Math.floor(this.state.cropperDetails.y)}px
+    </Typography>
+</span>
+<span>
+    <CropIcon fontSize="small" />
+    <Typography variant="subtitle1" display="inline" className="position-details">
+        {Math.floor(this.state.cropperDetails.width)} x {Math.floor(this.state.cropperDetails.height)}px
+    </Typography>
+</span>
+</div> */
