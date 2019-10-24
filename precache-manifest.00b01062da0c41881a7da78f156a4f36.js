@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bef9981f5a7fc0c586fa231a94f3ab74",
+    "revision": "a1b86bbe9fa290a222a3d232afc5f814",
     "url": "/spartacus/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spartacus/static/css/2.3c5bbc55.chunk.css"
   },
   {
-    "revision": "4e5a06c45f53577906dc",
+    "revision": "bc03b2656070c2e6738c",
     "url": "/spartacus/static/css/main.c80f506b.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spartacus/static/js/2.4b67d00e.chunk.js"
   },
   {
-    "revision": "4e5a06c45f53577906dc",
-    "url": "/spartacus/static/js/main.784ec632.chunk.js"
+    "revision": "bc03b2656070c2e6738c",
+    "url": "/spartacus/static/js/main.de609e6a.chunk.js"
   },
   {
     "revision": "4ebef85d9c639f966702",
