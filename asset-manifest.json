@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/spartacus/static/css/main.c80f506b.chunk.css",
+    "main.js": "/spartacus/static/js/main.784ec632.chunk.js",
+    "main.js.map": "/spartacus/static/js/main.784ec632.chunk.js.map",
+    "runtime-main.js": "/spartacus/static/js/runtime-main.5a0509ad.js",
+    "runtime-main.js.map": "/spartacus/static/js/runtime-main.5a0509ad.js.map",
+    "static/css/2.3c5bbc55.chunk.css": "/spartacus/static/css/2.3c5bbc55.chunk.css",
+    "static/js/2.4b67d00e.chunk.js": "/spartacus/static/js/2.4b67d00e.chunk.js",
+    "static/js/2.4b67d00e.chunk.js.map": "/spartacus/static/js/2.4b67d00e.chunk.js.map",
+    "index.html": "/spartacus/index.html",
+    "precache-manifest.685c712a461c06c5b32b9bc7e1ffbef1.js": "/spartacus/precache-manifest.685c712a461c06c5b32b9bc7e1ffbef1.js",
+    "service-worker.js": "/spartacus/service-worker.js",
+    "static/css/2.3c5bbc55.chunk.css.map": "/spartacus/static/css/2.3c5bbc55.chunk.css.map",
+    "static/css/main.c80f506b.chunk.css.map": "/spartacus/static/css/main.c80f506b.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5a0509ad.js",
+    "static/css/2.3c5bbc55.chunk.css",
+    "static/js/2.4b67d00e.chunk.js",
+    "static/css/main.c80f506b.chunk.css",
+    "static/js/main.784ec632.chunk.js"
+  ]
+}
