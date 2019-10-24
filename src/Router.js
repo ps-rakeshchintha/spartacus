@@ -53,7 +53,7 @@ class App extends React.Component {
                         </AppBar>
 
                         <Switch>
-                            <Route exact path="/">
+                            <Route path="/">
                                 <ImageCropper />
                             </Route>
                         </Switch>
