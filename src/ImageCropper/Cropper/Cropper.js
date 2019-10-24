@@ -15,6 +15,8 @@ class Cropper extends React.Component {
         this.cropper = new imageCropper(image, {
             aspectRatio: that.props.aspectRatio,
             viewMode: 1,
+            zoomOnTouch: false,
+            zoomOnWheel: false,
             crop(event) {
                 //console.log("x:" + event.detail.x);
                 //console.log("y:" + event.detail.y);

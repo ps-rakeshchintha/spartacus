@@ -55,6 +55,9 @@ const styles = theme => ({
     },
     cropBtn: {
         margin: "0 40px"
+    },
+    cropper: {
+        marginTop: 50
     }
 });
 
@@ -68,7 +71,7 @@ class ImageCropper extends React.Component {
             rotateToDegree: 0
         },
         imageName: undefined,
-        imageType: undefined, 
+        imageType: undefined,
         imageUrl: undefined
     }
     handleDrawerToggle = () => {
@@ -128,15 +131,6 @@ class ImageCropper extends React.Component {
                     <nav className={classes.drawer}>
                         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
 
-                        <IconButton
-                            color="primary"
-                            aria-label="open drawer"
-                            edge="start"
-                            onClick={() => this.handleDrawerToggle()}
-                            className={classes.menuButton}
-                        >
-                            <MenuIcon />
-                        </IconButton>
                         <Hidden smUp implementation="css">
                             <Drawer
                                 variant="temporary"
@@ -206,14 +200,27 @@ class ImageCropper extends React.Component {
                     {!this.state.imageUrl && <FileUpload handleFileUpload={this.handleFileUpload} />}
                     {
                         this.state.imageUrl &&
-                        <Cropper ref="cropper"
-                            imageUrl={this.state.imageUrl}
-                            imageName={this.state.imageName}
-                            imageType={this.state.imageType}
-                            rotateToDegree={this.state.cropperOptions.rotateToDegree}
-                            aspectRatio={this.state.cropperOptions.aspectRatio}
-                            flipHorizontal={this.state.cropperOptions.flipHorizontal}
-                            flipVertical={this.state.cropperOptions.flipVertical} />
+                        <React.Fragment>
+                            <Hidden smUp>
+                                <IconButton
+                                    color="primary"
+                                    aria-label="open drawer"
+                                    edge="start"
+                                    onClick={() => this.handleDrawerToggle()}
+                                    className={classes.menuButton}
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                            </Hidden>
+                            <Cropper className={classes.cropper} ref="cropper"
+                                imageUrl={this.state.imageUrl}
+                                imageName={this.state.imageName}
+                                imageType={this.state.imageType}
+                                rotateToDegree={this.state.cropperOptions.rotateToDegree}
+                                aspectRatio={this.state.cropperOptions.aspectRatio}
+                                flipHorizontal={this.state.cropperOptions.flipHorizontal}
+                                flipVertical={this.state.cropperOptions.flipVertical} />
+                        </React.Fragment>
                     }
 
                 </main>

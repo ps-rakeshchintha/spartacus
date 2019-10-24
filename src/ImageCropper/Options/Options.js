@@ -27,7 +27,6 @@ class Options extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Divider />
                 <AspectRatio
                     aspectRatio={this.props.cropperOptions.aspectRatio}
                     onAspectRatioChange={this.handleAspectRatioChange} />

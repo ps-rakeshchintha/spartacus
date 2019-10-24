@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ImageCropper from './ImageCropper/ImageCropper';
+import App from "./Router";
 
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <React.Fragment>
         <CssBaseline />
-        <ImageCropper />
+        <App />
     </React.Fragment>
     , document.getElementById('root'));
 
